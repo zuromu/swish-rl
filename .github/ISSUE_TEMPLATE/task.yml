@@ -1,0 +1,24 @@
+name: Task                      # shown on the "New issue" chooser
+description: Plan a piece of work (feature, fix, docs or chore) before creating a branch.
+body:                           # the form fields, top to bottom
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should exist or work when this is done, and why does it matter?
+    validations:
+      required: true            # GitHub won't let the issue be submitted without it
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: A checklist that defines "done". Every item should be something you can verify.
+      value: |                  # pre-filled text, so the writer starts with a checkbox
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Approach ideas, links, open questions. Optional.

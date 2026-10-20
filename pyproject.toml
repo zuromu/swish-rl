@@ -1,0 +1,42 @@
+[project]
+name = "swish-rl"
+version = "0.1.0"
+description = "A 2D basketball game where an AI learns to shoot from scratch using reinforcement learning."
+readme = "README.md"
+authors = [
+    { name = "Ahmad Hoesin", email = "ahmadhoesin7@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+swish-rl = "swish_rl:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.414",
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+]
+
+[tool.ruff.lint]
+# E/F = errors and bugs, I = import order, B = likely bugs, UP = modern syntax,
+# N = naming, SIM = simplifications, D = docstrings
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]  # test names describe themselves, so no docstrings needed
+
+[tool.pyright]
+typeCheckingMode = "strict"
+
+[tool.pytest]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers"]
