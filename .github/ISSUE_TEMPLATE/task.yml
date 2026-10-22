@@ -14,7 +14,7 @@ body:                           # the form fields, top to bottom
       label: Acceptance criteria
       description: A checklist that defines "done". Every item should be something you can verify.
       value: |                  # pre-filled text, so the writer starts with a checkbox
-        - [ ] 
+        - [ ]
     validations:
       required: true
   - type: textarea

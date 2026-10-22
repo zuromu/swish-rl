@@ -1,0 +1,35 @@
+minimum_pre_commit_version: "4.4.0"
+
+repos:
+  # Small file-hygiene checks maintained by the pre-commit project
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: no-commit-to-branch   # blocks commits on main
+
+  # Our own tools, run through uv so they use the exact versions in uv.lock
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+        language: unsupported
+        types: [python]
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check
+        language: unsupported
+        types: [python]
+      - id: pyright
+        name: pyright
+        entry: uv run pyright
+        language: unsupported
+        types: [python]
+        pass_filenames: false
