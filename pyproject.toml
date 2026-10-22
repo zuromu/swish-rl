@@ -28,6 +28,7 @@ dev = [
 # E/F = errors and bugs, I = import order, B = likely bugs, UP = modern syntax,
 # N = naming, SIM = simplifications, D = docstrings
 select = ["E", "F", "I", "B", "UP", "N", "SIM", "D"]
+ignore = ["D105"]  # magic methods like __add__ explain themselves
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
