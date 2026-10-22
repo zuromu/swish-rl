@@ -19,5 +19,14 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked
 
-      # Your steps go here: one step per check, in the same order
-      # as your local full check.
+      - name: Check formatting
+        run: uv run ruff format --check
+
+      - name: Lint
+        run: uv run ruff check --output-format=github
+
+      - name: Type check
+        run: uv run pyright
+
+      - name: Run tests
+        run: uv run pytest
