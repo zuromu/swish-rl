@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- A game window (`uv run swish-rl`) that shows a ball falling under gravity and bouncing off the floor.
 - CI workflow that runs formatting, lint, type checks and tests on every pull request.
 - Project setup with uv: Python 3.12, a `src/` layout and a `swish-rl` command.
 - Issue form and pull request template that ask for acceptance criteria and What / Why / How tested.
