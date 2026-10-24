@@ -1,6 +1,6 @@
 import pytest
 
-from swish_rl.physics import Ball, step
+from swish_rl.physics import Ball, bounce_off_floor, step
 from swish_rl.vec import Vec2
 
 
@@ -28,3 +28,31 @@ def test_step_does_not_change_input() -> None:
     ball = Ball(position=Vec2(0, 0), velocity=Vec2(2, 0))
     step(ball, dt=0.5)
     assert ball == Ball(position=Vec2(0, 0), velocity=Vec2(2, 0))
+
+
+def test_ball_above_floor_is_unchanged() -> None:
+    ball = Ball(position=Vec2(0, 1), velocity=Vec2(0, -2))
+    assert bounce_off_floor(ball) == ball
+
+
+def test_ball_hitting_floor_bounces() -> None:
+    ball = Ball(position=Vec2(0, 0.1), velocity=Vec2(3, -5))
+    bounced = bounce_off_floor(ball)
+    assert bounced.position.y == pytest.approx(0.12)
+    assert bounced.velocity.y == pytest.approx(4.0)
+    assert bounced.velocity.x == 3
+
+
+def test_ball_moving_up_is_not_bounced() -> None:
+    ball = Ball(position=Vec2(0, 0.1), velocity=Vec2(0, 1))
+    assert bounce_off_floor(ball) == Ball(position=Vec2(0, 0.1), velocity=Vec2(0, 1))
+
+
+def test_first_bounce_height_matches_restitution() -> None:
+    ball = Ball(position=Vec2(0, 2.12), velocity=Vec2(0, 0))
+    highest = 0.0
+    for _ in range(900):
+        ball = bounce_off_floor(step(ball, dt=1 / 600))
+        if ball.velocity.y >= 0:
+            highest = max(highest, (ball.position.y - ball.radius))
+    assert highest == pytest.approx((0.8**2 * 2.0), abs=0.02)
