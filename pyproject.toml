@@ -7,7 +7,9 @@ authors = [
     { name = "Ahmad Hoesin", email = "ahmadhoesin7@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pygame-ce>=2.5.8",
+]
 
 [project.scripts]
 swish-rl = "swish_rl:main"
